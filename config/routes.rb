@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   
 
+  resources :courses
   devise_for :teachers
  # get 'welcome_teacher/index'
   get '/teacher' => 'welcome_teacher#index'
