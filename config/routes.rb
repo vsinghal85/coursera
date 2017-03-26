@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   
   
 
+  devise_for :teachers
+  get 'welcome_teacher/index'
+
   devise_for :users
   get 'welcome/index'
   root 'welcome#index'
