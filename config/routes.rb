@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :courses
   devise_for :teachers
+  get '/course_list'=> 'welcome_teacher#course_list'
+   get '/create_course' => 'courses#new'
  # get 'welcome_teacher/index'
   get '/teacher' => 'welcome_teacher#index'
    get '/user' => 'welcome#index'

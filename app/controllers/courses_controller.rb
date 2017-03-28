@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
+  #before_action :authenticate_teacher!
   # GET /courses
   # GET /courses.json
   def index
@@ -25,9 +25,12 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
+    
     respond_to do |format|
       if @course.save
+        if current_teacher!=nil
+        tcm=TeacherCourseMapping.create(Teacher_id: current_teacher.id,Course_id: @course.id)
+        end
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else

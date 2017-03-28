@@ -1,4 +1,4 @@
 class TeacherCourseMapping < ActiveRecord::Base
-  belongs_to :Teacher
-  belongs_to :Course
+  belongs_to :teacher
+  belongs_to :course
 end
