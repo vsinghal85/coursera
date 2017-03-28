@@ -10,6 +10,7 @@ Rails.application.routes.draw do
  # get 'welcome_teacher/index'
   get '/teacher' => 'welcome_teacher#index'
    get '/user' => 'welcome#index'
+   post 'subscribe' => 'courses#subscribe'
   devise_for :users
   #get 'welcome/index'
   root 'welcome#index'

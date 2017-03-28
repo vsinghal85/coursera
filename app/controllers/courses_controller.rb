@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  
   #before_action :authenticate_teacher!
   # GET /courses
   # GET /courses.json
@@ -11,12 +12,23 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
   end
-
+  
   # GET /courses/new
   def new
     @course = Course.new
   end
+   
+  def subscribe
+    course_id=params[:course_id];
+   if !is_subscribed(course_id)
+    Subscription.create(User_id:current_user.id,Course_id:course_id)
+  else
+    #Subscription.destroy(User_id:current_user.id,Course_id:course_id)
+    Subscription.find_by_User_id_and_Course_id(current_user.id,course_id).destroy
 
+   end
+  return redirect_to '/'
+  end  
   # GET /courses/1/edit
   def edit
   end
@@ -72,6 +84,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:title, :description)
+      params.require(:course).permit(:title, :description,:content)
     end
 end

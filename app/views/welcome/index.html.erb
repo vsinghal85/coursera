@@ -9,3 +9,17 @@
 <% end %>
 
 <%= link_to "Teachers Login ?", teacher_path, :class => 'navbar-link'  %> |
+
+<h1>Here are the list of available courses</h1>
+<% @courses.each do |course| %>
+    <br>
+      <tr>
+        <td><%= course.title %></td><br>
+        <td><%= course.description %></td><br>
+     <% if current_user!=nil and is_subscribed(course.id) %>
+        <td><%= course.content %></td>
+    <% end %>   
+        <td><%= link_to 'Show', course %></td>
+        <%= link_to "Subscribe", url_for(controller: :courses, action: :subscribe, course_id: course.id), method: :post %>
+      </tr>
+    <% end %>
